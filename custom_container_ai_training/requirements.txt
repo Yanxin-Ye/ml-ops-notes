@@ -1,0 +1,4 @@
+kfp==0.2.5
+fire
+gcsfs
+requests-toolbelt==0.10.1
