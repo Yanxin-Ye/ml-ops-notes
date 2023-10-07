@@ -1,0 +1,73 @@
+git clone https://github.com/one-thd/analytics-intel.git
+
+ln -s ~/analytics-intel ~/analytics_intel
+
+cd ~/analytics-intel
+
+# 
+
+gcloud artifacts repositories create analytics-intel-repo --repository-format=docker \
+    --location=us-east1 --description="Analytics Intel Docker repository"
+	
+	
+gcloud builds submit --region=us-east1 --tag us-east1-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/analytics-intel-repo/quickstart-image:tag1 
+
+
+############################
+## 2. A python package in Artifact Registry https://cloud.google.com/artifact-registry/docs/python/store-python
+
+gcloud artifacts repositories create quickstart-python-repo \
+    --repository-format=python \
+    --location=us-east1 \
+    --description="Python package repository"
+
+gcloud config set artifacts/repository quickstart-python-repo
+
+gcloud config set artifacts/location us-east1
+
+mkdir python-quickstart
+mkdir python-quickstart/dist
+cd python-quickstart/dist
+
+pip download git+https://github.com/one-thd/analytics-intel.git@build_whl
+
+cd ..
+python3 -m twine upload --repository-url https://us-east1-python.pkg.dev/${GOOGLE_CLOUD_PROJECT}/quickstart-python-repo/ dist/* --verbose
+## Failed bc our analytics-intel package generate a zip rather than whl file. Need to look up why.
+
+## 3. Run
+###########################################################################################################################
+nano requirements.txt
+#########################################
+pandas>=1.3.5
+numpy>=1.21.6
+plotly>=5.10.0
+pre-commit>=2.20.0
+#########################################
+
+nano Dockerfile
+#########################################################
+FROM python:3.10
+
+WORKDIR /
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+#########################################################
+
+
+nano cloudbuild.yaml
+#########################################################
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/analytics-intel-image:tag1', '.' ]
+images:
+- 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/analytics-intel-image:tag1'
+#########################################################
+
+-- Create docker repo
+gcloud artifacts repositories create quickstart-docker-repo --repository-format=docker \
+    --location=us-central1 --description="Docker repository"
+
+-- Start cloud build using cloudbuild.yaml
+gcloud builds submit --region=us-central1 --config cloudbuild.yaml
