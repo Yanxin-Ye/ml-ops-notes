@@ -35,7 +35,7 @@ cd ..
 python3 -m twine upload --repository-url https://us-east1-python.pkg.dev/${GOOGLE_CLOUD_PROJECT}/quickstart-python-repo/ dist/* --verbose
 ## Failed bc our analytics-intel package generate a zip rather than whl file. Need to look up why.
 
-## 3. Run
+## 3. Artifact Registry using cloud build, with cloudbuild.yaml in vim
 ###########################################################################################################################
 nano requirements.txt
 #########################################
