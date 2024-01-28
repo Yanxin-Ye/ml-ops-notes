@@ -2,3 +2,6 @@
 Attention is All you Need(2017)
 ReAct: Synergizing Reasoning and Acting in Language Models(2022)
 Practical Lessons from Predicting Clicks on Ads at Facebook(2014)
+Scaling Instruction-Finetuned Language Models(2022)
+Fine-tuning 20B LLMs with RLHF on a 24GB consumer GPU (https://huggingface.co/blog/trl-peft)
+Consititutional AI: Harmlessness from AI Feedback
