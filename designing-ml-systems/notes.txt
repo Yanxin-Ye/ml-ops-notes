@@ -1,0 +1,58 @@
+1. Your model failed. Why?
+
+Model Assumptions
+Poor implementation of model
+Poor choice of hyperparameters
+Data problems
+Poor choice of features
+
+Some thing you can do? No scientific approach to debug ML model
+Start simple and gradually add more components
+Overfit a single batch
+Set a random seed
+
+
+2. What is data leakage and how to prevent it?
+Data leakage is when a form of label leaks into the set of features used for making predictions, but the same info is not available during model inference.
+Measure the prediction power of each feature or a set of features. If a feature has unusually high correlation, investigate.
+Measure importance of features. If removing a feature or a set of features cause model performance to deteriorate significantly, investigate.
+Be careful with your test split. Test split should only be used to report a model’s final performance.
+
+
+3. Explain precision, recall, and the F1 score.
+
+All three help us get a better understanding of how well a model performed in a classification model. 
+No one number can tell us if a model is good or not, so we often have to look at a confusion matrix to make our assessment.
+  
+Precision: Measures how well a model makes a positive prediction. It is the number of TP/(TP+FP)
+Looking at precision is vital when the cost of a false positive is high, e.g., spam email classification prefers high precision
+Recall: Measures how well a model makes a negative prediction. It is the number of TP/(TP+FN)
+Looking at recall is vital when the cost of a false negative is high, e.g., detecting lung cancer from x-ray prefers high recall.
+F1 Score: A function of precision and recall. It gives us a more balanced understanding of how well our model performs, especially if we started with imbalanced training data.
+F1 = 2*Precision*Recall/(Precision+Recall)
+
+
+4. Handle imbalance data.
+Usually when a class is less than 10% of total data, it can be considered as an imbalanced dataset.
+a) Data level:
+Collect more data in minority class
+Undersample: might remove important data
+Oversample: might overfit
+To mitigate: 
+Two-phase learning: train on resampled data, fine tune on original data
+Dynamic sampling: oversample the low-performing class and undersample the high performing class during training.
+b) Metric level:
+Check precision/recall, f1, AUC in ROC curve
+c) Algorithm level:
+Add stronger penalty on misclassifying the minority class in loss function
+
+
+5. How to determine if a feature is good?
+a) Feature importance: 
+Built-in feature importance in classic models such as XGBoost.
+Shapley value
+b) Feature generalization: does the feature generalize to unseen data
+Bad examples: user_id in predicting hate speech, 
+Domain knowledge
+Coverage of feature: how many data are missing
+Feature value distribution: if the train data has a set of values with no overlap with that of test data, the feature won’t generalize.
