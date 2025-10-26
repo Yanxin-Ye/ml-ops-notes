@@ -1,0 +1,9 @@
+{
+  "best_params": {
+    "clf__solver": "liblinear",
+    "clf__penalty": "l1",
+    "clf__class_weight": "balanced",
+    "clf__C": 10
+  },
+  "best_cv_auc": 0.7513649189024809
+}
