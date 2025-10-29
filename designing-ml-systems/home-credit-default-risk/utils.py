@@ -36,3 +36,6 @@ def print_result(model,x_test):
     feat_importances.nlargest(15).plot(kind='barh')
     return pd.DataFrame(model.cv_results_)
 
+def check_missing_col_coverage(df: pd.DataFrame):
+    x = np.sum(df.isnull(),axis=0)/df.shape[0]*100
+    return x[x>0]

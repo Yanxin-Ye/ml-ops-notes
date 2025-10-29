@@ -10,5 +10,5 @@
     "gamma": 0.3,
     "colsample_bytree": 1.0
   },
-  "best_cv_auc": 0.7619184931086339
+  "best_cv_auc": 0.7706159665998368
 }
