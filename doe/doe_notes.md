@@ -107,7 +107,7 @@ Y_{ij} = \mu + \tau_i + \epsilon_{ij}
 ### **Treatment (Between Groups)**
 
 ```math
-SS_T = n \sum_{i=1}^a (\bar{Y}_i - \bar{Y})^2
+SS_{Trement} = n \sum_{i=1}^a (\bar{Y}_i - \bar{Y})^2
 ```
 
 ### **Error (Within Groups)**
@@ -119,7 +119,7 @@ SS_E = \sum_{i=1}^a \sum_{j=1}^n (Y_{ij} - \bar{Y}_i)^2
 ### **Total**
 
 ```math
-SS_{Total} = SS_T + SS_E
+SS_{Total} = SS_{Treatment} + SS_E
 ```
 
 ---
@@ -127,7 +127,7 @@ SS_{Total} = SS_T + SS_E
 ## **Degrees of Freedom**
 
 * Treatment: (a - 1)
-* Error: (N - a = a(n - 1))
+* Error: N - a = a(n - 1)
 * Total: (N - 1)
 
 ---
@@ -135,7 +135,7 @@ SS_{Total} = SS_T + SS_E
 ## **Mean Squares**
 
 ```math
-MS_T = \frac{SS_T}{a - 1}
+MS_{Treatment} = \frac{SS_{Treatment}}{a - 1}
 ```
 
 ```math
@@ -147,39 +147,13 @@ MS_E = \frac{SS_E}{N - a}
 ## **F Statistic**
 
 ```math
-F_0 = \frac{MS_T}{MS_E}
+F_0 = \frac{MS_{Treatment}}{MS_E}
 ```
 
 **Decision Rule**
 Reject H₀ if:
 
 ```math
-F_0 > F_{\alpha}(a-1,\; N-a)
+F_0 > F_{\alpha,a-1,N-a}
 ```
-
----
-
-# ## ✔️ TL;DR Table
-
-### **One Sample**
-
-| Case      | Test Statistic                                   |
-| --------- | ------------------------------------------------ |
-| σ known   | (Z = \frac{\bar{X}-\mu_0}{\sigma/\sqrt{n}})      |
-| σ unknown | (t = \frac{\bar{X}-\mu_0}{s/\sqrt{n}}), df = n−1 |
-
-### **Two Samples**
-
-| Case                                | Test          |
-| ----------------------------------- | ------------- |
-| σ known                             | Z-test        |
-| σ unknown, large n                  | Z-test        |
-| σ unknown, small n, equal variances | pooled t-test |
-
-### **ANOVA**
-
-* Compute SST, SSE, MS_Treat, MS_Error
-* (F = MS_T / MS_E)
-* Compare to F critical
-
 
