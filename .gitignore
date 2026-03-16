@@ -1,2 +1,39 @@
-designing-ml-systems/home-credit-default-risk/data/
+# Project-level ignore rules
+
+# Local dataset/files from Kaggle workflow
+*/data/
+
+# General data artifacts
 *.csv
+*.json
+*.pkl
+*.zip
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtualenvs
+venv/
+env/
+ml/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Temp
+*.tmp
+*.swp
+*~
